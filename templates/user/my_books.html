@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}My Books{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 class="mb-4"><i class="fas fa-book-open"></i> My Issued Books</h2>
+    {% if total_fines > 0 %}
+    <div class="alert alert-warning">
+        <i class="fas fa-exclamation-triangle"></i> You have pending fines: <strong>₹{{ "%.2f"|format(total_fines) }}</strong>
+    </div>
+    {% endif %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr><th>Book</th><th>Author</th><th>Issue Date</th><th>Due Date</th><th>Current Fine</th></tr>
+            </thead>
+            <tbody>
+                {% for trans in issued_books %}
+                <tr class="{{ 'table-danger' if trans.current_fine > 0 else '' }}">
+                    <td>{{ trans.book.title }}</td>
+                    <td>{{ trans.book.author }}</td>
+                    <td>{{ trans.issue_date.strftime('%b %d, %Y') }}</td>
+                    <td>{{ trans.due_date.strftime('%b %d, %Y') }}</td>
+                    <td>{% if trans.current_fine > 0 %}<strong class="text-danger">₹{{ "%.2f"|format(trans.current_fine) }}</strong>{% else %}-{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

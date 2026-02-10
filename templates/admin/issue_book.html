@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Issue Book{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="mb-4"><i class="fas fa-hand-holding"></i> Issue Book</h2>
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="mb-3">
+                            <label class="form-label">Select User *</label>
+                            <select class="form-select" name="user_id" required>
+                                <option value="">Choose user...</option>
+                                {% for user in users %}
+                                <option value="{{ user._id }}">{{ user.full_name }} ({{ user.username }})</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Select Book *</label>
+                            <select class="form-select" name="book_id" required>
+                                <option value="">Choose book...</option>
+                                {% for book in books %}
+                                <option value="{{ book._id }}">{{ book.title }} - {{ book.author }} (Available: {{ book.available_quantity }})</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Issue Book</button>
+                        <a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Overdue Books{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <h2 class="mb-4 text-danger"><i class="fas fa-exclamation-triangle"></i> Overdue Books</h2>
+    <div class="table-responsive">
+        <table class="table table-danger table-striped">
+            <thead><tr><th>User</th><th>Book</th><th>Due Date</th><th>Days Overdue</th><th>Fine</th><th>Action</th></tr></thead>
+            <tbody>
+                {% for trans in transactions %}
+                <tr>
+                    <td>{{ trans.user.full_name }}<br><small>{{ trans.user.email }}</small></td>
+                    <td>{{ trans.book.title }}</td>
+                    <td>{{ trans.due_date.strftime('%Y-%m-%d') }}</td>
+                    <td>{{ trans.days_overdue }} days</td>
+                    <td class="fw-bold">₹{{ "%.2f"|format(trans.current_fine) }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('admin.return_book', transaction_id=trans._id) }}">
+                            <button class="btn btn-sm btn-success">Return</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}{{ book.title }}{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">{{ book.title }}</h3>
+                    <p class="text-muted">by {{ book.author }}</p>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+                            <p><strong>Category:</strong> <span class="badge bg-secondary">{{ book.category }}</span></p>
+                            <p><strong>Publisher:</strong> {{ book.publisher }}</p>
+                            <p><strong>Year:</strong> {{ book.publication_year }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Total Copies:</strong> {{ book.quantity }}</p>
+                            <p><strong>Available:</strong> <span class="badge bg-success">{{ book.available_quantity }}</span></p>
+                            <p><strong>Status:</strong> {% if book.available_quantity > 0 %}<span class="text-success">Available</span>{% else %}<span class="text-danger">Not Available</span>{% endif %}</p>
+                        </div>
+                    </div>
+                    {% if book.description %}
+                    <hr>
+                    <h5>Description</h5>
+                    <p>{{ book.description }}</p>
+                    {% endif %}
+                    <hr>
+                    {% if already_issued %}
+                    <div class="alert alert-info">You have already issued this book</div>
+                    {% elif book.available_quantity <= 0 %}
+                    <div class="alert alert-warning">This book is currently not available</div>
+                    {% else %}
+                    <p class="text-success"><i class="fas fa-check-circle"></i> This book is available for issue. Please contact the librarian to issue this book.</p>
+                    {% endif %}
+                    <a href="{{ url_for('user.browse_books') }}" class="btn btn-secondary">Back to Browse</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

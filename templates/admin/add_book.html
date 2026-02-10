@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Add Book{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="mb-4"><i class="fas fa-plus"></i> Add New Book</h2>
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Title *</label>
+                                <input type="text" class="form-control" name="title" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Author *</label>
+                                <input type="text" class="form-control" name="author" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">ISBN *</label>
+                                <input type="text" class="form-control" name="isbn" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Category *</label>
+                                <input type="text" class="form-control" name="category" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Publisher *</label>
+                                <input type="text" class="form-control" name="publisher" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Publication Year *</label>
+                                <input type="number" class="form-control" name="publication_year" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Quantity *</label>
+                                <input type="number" class="form-control" name="quantity" required min="1">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" name="description" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Cover Image URL</label>
+                            <input type="url" class="form-control" name="cover_image">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Book</button>
+                        <a href="{{ url_for('admin.books') }}" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -45,10 +45,10 @@ db.users.insert_one(admin)
 print("Creating sample users...")
 sample_users = [
     {
-        'username': 'john_doe',
-        'email': 'john@example.com',
-        'password': generate_password_hash('password123'),
-        'full_name': 'John Doe',
+        'username': 'mouneesh',
+        'email': 'mouneesh@example.com',
+        'password': generate_password_hash('123456'),
+        'full_name': 'Mouneesh',
         'role': 'user',
         'phone': '+91-9876543211',
         'address': '456 User Lane, City',

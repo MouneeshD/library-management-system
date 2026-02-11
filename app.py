@@ -87,5 +87,6 @@ if __name__ == '__main__':
         mongo.db.transactions.create_index('book_id')
         mongo.db.transactions.create_index('issue_date')
         mongo.db.transactions.create_index('status')
+
     
     app.run(debug=True, host='0.0.0.0', port=5000)
